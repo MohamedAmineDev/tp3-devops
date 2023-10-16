@@ -18,7 +18,7 @@ pipeline{
             steps{
                 dir("tp3-devops"){
                     sh "mvn clean install"
-                    sh "docker build -t backend ."
+                    sh "docker build -t new-backend ."
                 }
             }
         }
