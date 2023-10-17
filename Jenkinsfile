@@ -1,33 +1,33 @@
 pipeline{
-    agent any
-    tools{
-        maven 'maven'
+  agent any
+  tools{
+    maven 'maven'
+  }
+  stages{
+    stage("Clean un"){
+      steps{
+        deleteDir()
+      }
     }
-    stages{
-        stage("Clean up"){
-            steps{
-                deleteDir()
-            }
-        }
-        stage("Clone repo"){
-            steps{
-                sh "git clone https://github.com/MohamedAmineDev/tp3-devops.git"
-            }
-        }
-        stage("Generate docker image"){
-            steps{
-                dir("tp3-devops"){
-                    sh "mvn clean install"
-                    sh "docker build -t new-backend ."
-                }
-            }
-        }
-        stage("Run docker compose"){
-            steps{
-                dir("tp3-devops"){
-                    sh "docker compose up -d "
-                }
-            }
-        }
+    stage("Clone repo"){
+      steps{
+        sh "git clone https://github.com/MohamedAmineDev/spring-boot-devops-tp3.git "
+      }
     }
+    stage("Generate backend image"){
+      steps{
+        dir("spring-boot-devops-tp3"){
+          sh "mvn clean install -DskipTests"
+          sh "docker build -t web-backend ."
+        }
+      }
+    }
+    stage("Run docker compose"){
+      steps{
+        dir("spring-boot-devops-tp3"){
+          sh "docker compose up -d"
+        }
+      }
+    }
+  }
 }
