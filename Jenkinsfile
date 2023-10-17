@@ -11,7 +11,7 @@ pipeline{
     }
     stage("Clone repo"){
       steps{
-        sh "git clone https://github.com/MohamedAmineDev/spring-boot-devops-tp3.git "
+        sh "git clone https://github.com/MohamedAmineDev/tp3-devops.git "
       }
     }
     stage("Generate backend image"){
