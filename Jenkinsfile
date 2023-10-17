@@ -16,7 +16,7 @@ pipeline{
     }
     stage("Generate backend image"){
       steps{
-        dir("spring-boot-devops-tp3"){
+        dir("tp3-devops"){
           sh "mvn clean install -DskipTests"
           sh "docker build -t web-backend ."
         }
@@ -24,7 +24,7 @@ pipeline{
     }
     stage("Run docker compose"){
       steps{
-        dir("spring-boot-devops-tp3"){
+        dir("tp3-devops"){
           sh "docker compose up -d"
         }
       }
